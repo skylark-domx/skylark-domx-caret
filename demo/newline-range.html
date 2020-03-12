@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Newline test - $.fn.caret() and $.fn.range()</title>
+        <style>
+            *, *:before, *:after {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+            textarea {
+                width: 100%;
+                height: 15em;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Range: <b id="range">...</b></p>
+        <textarea></textarea>
+
+        <!-- Load local jQuery. -->
+        <script src="../dist/uncompressed/skylark-domx-carets-all.js"></script>
+
+        <script>
+            String.prototype.visualizeNewlines = function() {
+                return this.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+            };
+            var $ = skylarkjs.domx.query;
+
+            $(function() {
+                var lineNumbers = [ 1, 2, 3, 4 ];
+                var lines = skylarkjs.langx.map(lineNumbers,function (val) { return 'Line ' + val; });
+                var text = lines.join('\n') + '\n\nABC\n\nDEF';
+
+                var $textarea = $('textarea');
+                var $range = $('#range');
+
+                $textarea.val(text);
+
+                $textarea.on('keydown keyup keypress change click mousedown mouseup mousemove', function() {
+                    $range.text(JSON.stringify($textarea.range()));
+                });
+            });
+        </script>
+    </body>
+</html>
