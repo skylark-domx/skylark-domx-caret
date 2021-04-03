@@ -146,7 +146,6 @@ define([
      * Replaces the currently selected text with the given string.
      * @param {HTMLInputElement|HTMLTextAreaElement} input input or textarea element
      * @param {String} text New text that will replace the currently selected text.
-     * @see http://parentnode.org/javascript/working-with-the-cursor-position/
      */
     function replaceInputRange(input, text) {
         var oldValue = datax.val(input);
